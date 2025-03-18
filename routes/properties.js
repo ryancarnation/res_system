@@ -49,4 +49,25 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// PUT update a property by ID
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title, description, location } = req.body;
+
+  try {
+    const result = await pool.query(
+      `UPDATE properties
+       SET title = $1, description = $2, location = $3
+       WHERE id = $4
+       RETURNING *`,
+      [title, description, location, id]
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update property' });
+  }
+});
+
 module.exports = router;
