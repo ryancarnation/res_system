@@ -8,8 +8,9 @@ const PORT = process.env.PORT || 5000;
 const reservationRoutes = require('../routes/reservations');
 const propertyRoutes = require('../routes/properties');
 const syncRoutes = require('../routes/sync');
+const reportRoutes = require('../routes/reports')
 const cron = require('node-cron');
-const { syncReservations } = require('./services/syncService');
+const { syncReservations } = require('../src/services/syncService');
 
 // PostgreSQL Connection
 const pool = new Pool({
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/reservations', reservationRoutes);
 app.use('/api/properties', propertyRoutes)
 app.use('/api/sync', syncRoutes)
+app.use('/api/reports', reportRoutes)
 
 // Cron job for syncing data between Vrbo and Airbnb
 cron.schedule('*/5 * * * *', () => {

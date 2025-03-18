@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { syncReservations } = require('../services/syncService');
+const { syncReservations } = require('../src/services/syncService');
 
 router.post('/sync-reservations', async (req, res) => {
   try {
