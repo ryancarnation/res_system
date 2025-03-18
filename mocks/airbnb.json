@@ -1,0 +1,11 @@
+[
+    {
+      "external_id": "airbnb-1001",
+      "guest_name": "Alice Johnson",
+      "check_in": "2025-03-20",
+      "check_out": "2025-03-25",
+      "property_id": 2,
+      "source_platform": "Airbnb"
+    }
+  ]
+  
