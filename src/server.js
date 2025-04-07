@@ -13,9 +13,16 @@ const cron = require('node-cron');
 const { syncReservations } = require('../src/services/syncService');
 
 // PostgreSQL Connection
+const { Pool } = require('pg');
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // Required for production (e.g. Render)
+  },
 });
+
+module.exports = pool;
 
 // Middleware
 app.use(cors());
