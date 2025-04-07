@@ -22,7 +22,9 @@ const pool = new Pool({
 module.exports = pool;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://res-system.vercel.app/', // or '*', during testing
+}));
 app.use(express.json());
 app.use('/api/reservations', reservationRoutes);
 app.use('/api/properties', propertyRoutes)

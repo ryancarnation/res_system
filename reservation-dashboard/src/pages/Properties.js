@@ -18,7 +18,7 @@ const Properties = () => {
 
   const fetchProperties = useCallback(() => {
     setLoading(true);
-    axios.get('http://localhost:5000/api/properties')
+    axios.get('${process.env.REACT_APP_API_URL}/api/properties')
       .then(res => setProperties(res.data))
       .catch(err => {
         console.error(err);
@@ -41,8 +41,8 @@ const Properties = () => {
     setFormLoading(true);
   
     const endpoint = editMode
-      ? `http://localhost:5000/api/properties/${editId}`
-      : `http://localhost:5000/api/properties`;
+      ? `${process.env.REACT_APP_API_URL}/api/properties/${editId}`
+      : `${process.env.REACT_APP_API_URL}/api/properties`;
   
     const method = editMode ? axios.put : axios.post;
   
@@ -80,7 +80,7 @@ const Properties = () => {
   const handleDelete = (id) => {
     if (!window.confirm('Are you sure?')) return;
 
-    axios.delete(`http://localhost:5000/api/properties/${id}`)
+    axios.delete(`${process.env.REACT_APP_API_URL}/api/properties/${id}`)
       .then(() => {
         enqueueSnackbar('Property deleted', { variant: 'success' });
         fetchProperties();

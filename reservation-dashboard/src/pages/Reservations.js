@@ -34,7 +34,7 @@ const Reservations = () => {
 
   const fetchReservations = () => {
     setLoading(true);
-    axios.get('http://localhost:5000/api/reservations')
+    axios.get('${process.env.REACT_APP_API_URL}/api/reservations')
       .then(res => setReservations(res.data))
       .catch(err => {
         console.error(err);
@@ -44,7 +44,7 @@ const Reservations = () => {
   };
 
   const fetchProperties = () => {
-    axios.get('http://localhost:5000/api/properties')
+    axios.get('${process.env.REACT_APP_API_URL}/api/properties')
       .then(res => setProperties(res.data))
       .catch(err => {
         console.error(err);
@@ -62,8 +62,8 @@ const Reservations = () => {
     setFormLoading(true);
 
     const endpoint = editMode
-      ? `http://localhost:5000/api/reservations/${editId}`
-      : `http://localhost:5000/api/reservations`;
+      ? `${process.env.REACT_APP_API_URL}/api/reservations/${editId}`
+      : `${process.env.REACT_APP_API_URL}/api/reservations`;
 
     const method = editMode ? axios.put : axios.post;
 
@@ -96,7 +96,7 @@ const Reservations = () => {
     if (!window.confirm('Are you sure you want to delete this reservation?')) return;
 
     setLoading(true);
-    axios.delete(`http://localhost:5000/api/reservations/${id}`)
+    axios.delete(`${process.env.REACT_APP_API_URL}/api/reservations/${id}`)
       .then(() => {
         enqueueSnackbar('Reservation deleted', { variant: 'success' });
         fetchReservations();

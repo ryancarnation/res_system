@@ -7,7 +7,7 @@ const Reports = () => {
   const [reports, setReports] = useState([]);
 
   const fetchReports = () => {
-    axios.get('http://localhost:5000/api/reports/availability')
+    axios.get('${process.env.REACT_APP_API_URL}/api/reports/availability')
       .then(res => setReports(res.data))
       .catch(err => console.error(err));
   };
@@ -17,11 +17,11 @@ const Reports = () => {
   }, []);
 
   const downloadCSV = () => {
-    window.open('http://localhost:5000/api/reports/availability/csv', '_blank');
+    window.open('${process.env.REACT_APP_API_URL}/api/reports/availability/csv', '_blank');
   };
 
   const triggerSync = () => {
-    axios.post('http://localhost:5000/api/sync/sync-reservations')
+    axios.post('${process.env.REACT_APP_API_URL}/api/sync/sync-reservations')
       .then(() => {
         alert('Sync successful!');
         fetchReports(); // Refresh reports after sync
